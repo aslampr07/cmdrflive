@@ -11,11 +11,11 @@
 <body>
 
     <h1 id="counter">
-
+        0
     </h1>
 
     <script>
-        const socket = new WebSocket("ws://localhost:8000", "protocolOne");
+        const socket = new WebSocket("wss://cmdrf.live/websocket", "protocolOne");
         const mainElement = document.getElementById("counter");
 
         socket.onopen = (e) => {
