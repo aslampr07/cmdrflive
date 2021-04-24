@@ -27,8 +27,8 @@ const server = http.createServer();
 const wss = new WebSocket.Server({ server })
 
 wss.on("connection", (ws, req) => {
-    console.log("Client Connected: ")
-
+    console.log("Client Connected")
+    console.log("Total connections ", wss.clients.size)
 })
 
 server.listen(8000, () => {
@@ -37,8 +37,8 @@ server.listen(8000, () => {
 
 setInterval(async () => {
     const result = await getTotal()
-    console.log(result)
     broadCastData(JSON.stringify({ todayTotal: result }))
+    console.log("Total connections ", wss.clients.size)
 }, 6000);
 
 
