@@ -9,11 +9,15 @@
     <link href="https://unpkg.com/@pqina/flip/dist/flip.min.css" rel="stylesheet">
     <style>
         .root {
-            width: 70%;
-            margin: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
         }
 
         .tick {
+            width: 90%;
             font-size: 1rem;
             white-space: nowrap;
             font-family: arial, sans-serif;
@@ -36,7 +40,7 @@
         .tick-text-inline {
             display: inline-block;
             text-align: center;
-            min-width: 1em;
+            min-width: 0.5em;
         }
 
         .tick-text-inline+.tick-text-inline {
@@ -48,9 +52,6 @@
             text-align: center;
         }
 
-        body {
-            background-color: rgb(255, 122, 162) !important;
-        }
 
         .tick-text-inline {
             color: rgb(0, 0, 0) !important;
@@ -64,16 +65,12 @@
             color: rgb(253, 255, 247) !important;
         }
 
-        .tick-flip {
-            font-family:  !important;
-        }
-
         .tick-flip-panel-text-wrapper {
             line-height: 1.45 !important;
         }
 
         .tick-flip-panel {
-            background-color: rgb(107, 66, 255) !important;
+            background-color: #00579a !important;
         }
 
         .tick-flip {
@@ -85,6 +82,7 @@
 <body>
 
     <div class="root">
+        <div>Today's Count</div>
         <div class="tick" data-value="00000000" data-did-init="handleTickInit">
 
             <div data-value-mapping="indexes" data-layout="horizontal fit"
