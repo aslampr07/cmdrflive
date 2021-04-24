@@ -5,13 +5,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>CMDRF Live Statistics</title>
     <link href="https://unpkg.com/@pqina/flip/dist/flip.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Ubuntu:wght@700&display=swap"
+        rel="stylesheet">
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-22G05M635B"></script>
     <script>
@@ -32,7 +36,7 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            height: 80vh;
+            /* height: 80vh; */
         }
 
         .tick {
@@ -40,7 +44,11 @@
             font-size: 1rem;
             white-space: nowrap;
             font-family: arial, sans-serif;
-            /* font-family: 'Poppins', sans-serif; */
+            /* visibility: hidden; */
+        }
+
+        #tick-wrap {
+            visibility: hidden;
         }
 
         .tick-flip,
@@ -99,7 +107,7 @@
 
         .hashtag-wrap p {
             font-family: 'Poppins', sans-serif;
-            color: black !important;
+            color: #0e024d;
             font-weight: 600;
             margin-bottom: 0px;
             margin-top: 0px;
@@ -137,8 +145,47 @@
             width: 90%;
         }
 
-        .contene-section {
+        .content-section {
             width: 90%;
+        }
+
+        .content-section p {
+            color: #0e024d;
+        }
+
+        .content-section {
+            margin-top: 0px;
+        }
+
+        .title h1 {
+            font-family: 'Ubuntu', sans-serif;
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .title {
+            margin-top: -2.5rem;
+        }
+
+        a {
+            color: #00579a;
+        }
+
+        .disclaimer {
+            border-top: 1px solid #EFF0F1;
+            font-size: .8rem;
+            position: absolute;
+            bottom: 0px;
+        }
+
+        .disclaimer p {
+            margin-top: 8px;
+        }
+
+        .loader {
+            text-align: center;
+            width: 100%;
         }
 
         @media only screen and (max-width: 1140px) {
@@ -172,6 +219,18 @@
                 width: 100%;
             }
 
+            .content-section h1 {
+                text-align: center;
+            }
+
+            .content-section {
+                width: 98%;
+            }
+
+            .title {
+                margin-top: 0rem;
+            }
+
         }
     </style>
 </head>
@@ -187,8 +246,11 @@
             <img class="logo" src="./logo.jpeg" alt="crush the curve">
         </div>
     </div>
+    <div class="title">
+        <h1>CMDRF LIVE STATISTICS</h1>
+    </div>
     <div class="root">
-        <div class="contene-section">
+        <div class="content-section">
             <h1>
                 What is CMDRF?
             </h1>
@@ -201,7 +263,10 @@
         <div>
             <h1>Today's Donation</h1>
         </div>
-        <div class="tick" data-value="00000000" data-did-init="handleTickInit">
+        <div id="loader-wrap" class="loader">
+            <img src="./loader.gif" alt=logo />
+        </div>
+        <div id="tick-wrap" class="tick" data-value="00000000" data-did-init="handleTickInit">
 
             <div data-value-mapping="indexes" data-layout="horizontal fit"
                 data-transform="arrive(.2) -> round -> split -> delay(rtl, 100, 150)">
@@ -234,9 +299,23 @@
                 target="_blank">donation.cmdrf.kerala.gov.in</a>
         </div>
     </div>
+    <div class="disclaimer">
+        <p>DISCLAIMER: <span style="font-style: italic;">This website is for encouraging donations to CMDRF. Data shown
+                in this website may not be realtime. More insight to the data will be available at <a
+                    href="https://donation.cmdrf.kerala.gov.in/">CMDRF Website</a>.<span style="font-weight: 600;"> This
+                    is not an official website. For more information and donations visit<a
+                        href="https://donation.cmdrf.kerala.gov.in/">
+                        https://donation.cmdrf.kerala.gov.in/</a></span></span></p>
+        <p style="text-align: center;">
+            Contact: <a href="mailto:appzonein@gmail.com">appzonein@gmail.com
+            </a>
+        </p>
+    </div>
 
     <script src="https://unpkg.com/@pqina/flip/dist/flip.min.js"></script>
     <script>
+        const loaderItem = document.getElementById("loader-wrap")
+        const tickItem = document.getElementById("tick-wrap");
         const socket = new WebSocket("wss://cmdrf.live/websocket", "protocolOne");
 
         let x = 0;
@@ -248,6 +327,8 @@
         socket.onmessage = (message) => {
             const result = JSON.parse(message.data)
             x = result.todayTotal;
+            tickItem.style = "visibility:visible"
+            loaderItem.style = "display:none"
         }
 
         function handleTickInit(tick) {
@@ -267,7 +348,6 @@
         }
 
     </script>
-
 
 
 </body>
