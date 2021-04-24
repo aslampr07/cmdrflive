@@ -7,13 +7,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://unpkg.com/@pqina/flip/dist/flip.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-22G05M635B"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-22G05M635B');
+    </script>
     <style>
+        html {
+            font-size: 16px;
+            font-family: 'Poppins', sans-serif;
+        }
+
         .root {
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            height: 100vh;
+            height: 80vh;
         }
 
         .tick {
@@ -21,6 +40,7 @@
             font-size: 1rem;
             white-space: nowrap;
             font-family: arial, sans-serif;
+            /* font-family: 'Poppins', sans-serif; */
         }
 
         .tick-flip,
@@ -76,14 +96,111 @@
         .tick-flip {
             border-radius: 0.16em !important;
         }
+
+        .hashtag-wrap p {
+            font-family: 'Poppins', sans-serif;
+            color: black !important;
+            font-weight: 600;
+            margin-bottom: 0px;
+            margin-top: 0px;
+        }
+
+        .one {
+            font-size: 0.875rem
+        }
+
+        .two {
+            font-size: 1rem
+        }
+
+        .three {
+            font-size: 1.25rem
+        }
+
+        h1 {
+            font-weight: 600;
+        }
+
+        .logo {
+            width: 10rem;
+            height: 6rem;
+        }
+
+        .top-wrap {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .source-link {
+            margin-top: .5rem;
+            text-align: right;
+            width: 90%;
+        }
+
+        .contene-section {
+            width: 90%;
+        }
+
+        @media only screen and (max-width: 1140px) {
+            html {
+                font-size: 15px;
+            }
+        }
+
+        @media only screen and (max-width: 992px) {
+            html {
+                font-size: 14px;
+            }
+        }
+
+        @media only screen and (max-width: 768px) {
+            html {
+                font-size: 12px;
+            }
+        }
+
+        @media only screen and (max-width: 576px) {
+            html {
+                font-size: 12px;
+            }
+
+            .tick {
+                width: 100%;
+            }
+
+            .source-link {
+                width: 100%;
+            }
+
+        }
     </style>
 </head>
 
 <body>
-
+    <div class="top-wrap">
+        <div class="hashtag-wrap">
+            <p class="one">#VaccineForAll</p>
+            <p class="two"> #VaccinceChallenge</p>
+            <p class="three">#StandWithKerala </p>
+        </div>
+        <div>
+            <img class="logo" src="./logo.jpeg" alt="crush the curve">
+        </div>
+    </div>
     <div class="root">
-        <div>#standWithKerala</div>
-        <div>Today's Donation</div>
+        <div class="contene-section">
+            <h1>
+                What is CMDRF?
+            </h1>
+            <p>
+                Chief Minister’s Distress Relief Fund is an emergency assistance scheme for granting relief to deserving
+                families and individuals affected by natural calamities or loss of life of relatives due to accidents or
+                for medical treatment for major diseases.
+            </p>
+        </div>
+        <div>
+            <h1>Today's Donation</h1>
+        </div>
         <div class="tick" data-value="00000000" data-did-init="handleTickInit">
 
             <div data-value-mapping="indexes" data-layout="horizontal fit"
@@ -112,7 +229,12 @@
             </div>
 
         </div>
+        <div class="source-link">
+            <span>Source : </span><a href="https://donation.cmdrf.kerala.gov.in/index.php/Dashboard/allType_transaction"
+                target="_blank">donation.cmdrf.kerala.gov.in</a>
+        </div>
     </div>
+
     <script src="https://unpkg.com/@pqina/flip/dist/flip.min.js"></script>
     <script>
         const socket = new WebSocket("wss://cmdrf.live/websocket", "protocolOne");
