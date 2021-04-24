@@ -2,6 +2,7 @@ const got = require('got');
 const cheerio = require('cheerio');
 const http = require('http');
 const WebSocket = require('ws');
+const fs = require('fs');
 
 
 async function getTotal() {
@@ -40,6 +41,8 @@ setInterval(async () => {
     const result = await getTotal()
     broadCastData(JSON.stringify({ todayTotal: result }))
     console.log("Total connections:", wss.clients.size)
+    fs.appendFile('data.txt', `${new Date().toISOString()} - ${result}\n`, () => {
+    })
 }, 6000);
 
 
