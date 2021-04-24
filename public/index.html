@@ -6,202 +6,145 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://unpkg.com/@pqina/flip/dist/flip.min.css" rel="stylesheet">
     <style>
-        .numCounter {
-            display: inline-block;
-            height: 90px;
-            line-height: 90px;
-            text-shadow: 0 0 2px #fff;
-            font-weight: bold;
-            white-space: normal;
-            font-size: 50px;
+        .root {
+            width: 70%;
+            margin: auto;
         }
 
-        .numCounter>div {
-            display: inline-block;
-            vertical-align: top;
-            height: 100%;
+        .tick {
+            font-size: 1rem;
+            white-space: nowrap;
+            font-family: arial, sans-serif;
         }
 
-        .numCounter>div>b {
+        .tick-flip,
+        .tick-text-inline {
+            font-size: 2.5em;
+        }
+
+        .tick-label {
+            margin-top: 1em;
+            font-size: 1em;
+        }
+
+        .tick-char {
+            width: 1.5em;
+        }
+
+        .tick-text-inline {
             display: inline-block;
-            width: 40px;
-            height: 100%;
-            margin: 0 0.1em;
-            border-radius: 8px;
             text-align: center;
-            background: white;
-            overflow: hidden;
+            min-width: 1em;
         }
 
-        .numCounter>div>b::before {
-            content: ' 0 1 2 3 4 5 6 7 8 9 ';
-            display: block;
-            word-break: break-all;
-            -webkit-transition: 0.5s cubic-bezier(0.75, 0.15, 0.6, 1.15), text-shadow 150ms;
-            transition: 0.5s cubic-bezier(0.75, 0.15, 0.6, 1.15), text-shadow 150ms;
+        .tick-text-inline+.tick-text-inline {
+            margin-left: -.325em;
         }
 
-        .numCounter>div>b.blur {
-            text-shadow: 2px 1px 3px rgba(0, 0, 0, 0.2),
-                0 0.1em 2px rgba(255, 255, 255, 0.6),
-                0 0.3em 3px rgba(255, 255, 255, 0.3),
-                0 -0.1em 2px rgba(255, 255, 255, 0.6),
-                0 -0.3em 3px rgba(255, 255, 255, 0.3);
-        }
-
-        .numCounter>div>b[data-value="1"]::before {
-            margin-top: -90px;
-        }
-
-        .numCounter>div>b[data-value="2"]::before {
-            margin-top: -180px;
-        }
-
-        .numCounter>div>b[data-value="3"]::before {
-            margin-top: -270px;
-        }
-
-        .numCounter>div>b[data-value="4"]::before {
-            margin-top: -360px;
-        }
-
-        .numCounter>div>b[data-value="5"]::before {
-            margin-top: -450px;
-        }
-
-        .numCounter>div>b[data-value="6"]::before {
-            margin-top: -540px;
-        }
-
-        .numCounter>div>b[data-value="7"]::before {
-            margin-top: -630px;
-        }
-
-        .numCounter>div>b[data-value="8"]::before {
-            margin-top: -720px;
-        }
-
-        .numCounter>div>b[data-value="9"]::before {
-            margin-top: -810px;
-        }
-
-        .numCounter>div:nth-last-child(3n)::before {
-            content: ",";
-            display: inline;
-            font-size: 1.1em;
-            opacity: .6;
-            color: white;
-        }
-
-        html,
-        body {
-            height: 100%;
+        .tick-group {
+            margin: 0 .5em;
+            text-align: center;
         }
 
         body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: Arial;
+            background-color: rgb(255, 122, 162) !important;
         }
 
-        .numCounter {
-            overflow: hidden;
-            padding: .4em;
-            text-align: center;
-
-            border-radius: 16px;
-            background: black;
+        .tick-text-inline {
+            color: rgb(0, 0, 0) !important;
         }
 
-        .numCounter b {
-            color: black;
+        .tick-label {
+            color: rgb(0, 0, 0) !important;
+        }
+
+        .tick-flip-panel {
+            color: rgb(253, 255, 247) !important;
+        }
+
+        .tick-flip {
+            font-family:  !important;
+        }
+
+        .tick-flip-panel-text-wrapper {
+            line-height: 1.45 !important;
+        }
+
+        .tick-flip-panel {
+            background-color: rgb(107, 66, 255) !important;
+        }
+
+        .tick-flip {
+            border-radius: 0.16em !important;
         }
     </style>
 </head>
 
 <body>
 
-    <div class='numCounter' data-value='1839471'></div>
+    <div class="root">
+        <div class="tick" data-value="00000000" data-did-init="handleTickInit">
 
+            <div data-value-mapping="indexes" data-layout="horizontal fit"
+                data-transform="arrive(.2) -> round -> split -> delay(rtl, 100, 150)">
+
+                <span class="tick-text-inline">₹</span>
+
+                <span data-view="flip">0</span>
+                <span class="tick-text-inline">,</span>
+
+                <span data-view="flip">0</span>
+
+
+                <span data-view="flip">0</span>
+                <span class="tick-text-inline">,</span>
+
+                <span data-view="flip">0</span>
+                <span data-view="flip">0</span>
+
+                <span class="tick-text-inline">,</span>
+
+                <span data-view="flip">0</span>
+                <span data-view="flip">0</span>
+                <span data-view="flip">0</span>
+
+            </div>
+
+        </div>
+    </div>
+    <script src="https://unpkg.com/@pqina/flip/dist/flip.min.js"></script>
     <script>
         const socket = new WebSocket("wss://cmdrf.live/websocket", "protocolOne");
+
+        let x = 0;
 
         socket.onopen = (e) => {
             console.log(e)
         }
 
+        socket.onmessage = (message) => {
+            const result = JSON.parse(message.data)
+            x = result.todayTotal;
+        }
 
+        function handleTickInit(tick) {
+            tick.value = result.todayTotal;
+        }
 
         socket.onerror = (er) => {
             console.log(er)
         }
 
+        function handleTickInit(tick) {
 
-        function Counter(selector, settings) {
-            this.settings = Object.assign({
-                digits: 5,
-                delay: 250, // ms
-                direction: ''  // ltr is default
-            }, settings || {})
+            Tick.helper.interval(function () {
+                tick.value = x;
+            }, 1000);
 
-            var scopeElm = document.querySelector(selector)
-
-            // generate digits markup
-            var digitsHTML = Array(this.settings.digits + 1).join('<div><b data-value="0"></b></div>')
-            scopeElm.innerHTML = digitsHTML;
-
-            this.DOM = {
-                scope: scopeElm,
-                digits: scopeElm.querySelectorAll('b')
-            }
-
-            this.DOM.scope.addEventListener('transitionend', e => {
-                if (e.pseudoElement === "::before" && e.propertyName == 'margin-top') {
-                    e.target.classList.remove('blur')
-                }
-            })
-
-            this.count()
         }
 
-        Counter.prototype.count = function (newVal) {
-            var countTo, className,
-                settings = this.settings,
-                digitsElms = this.DOM.digits;
-
-            // update instance's value
-            this.value = newVal || this.DOM.scope.dataset.value | 0
-
-            if (!this.value) return;
-
-            // convert value into an array of numbers
-            countTo = (this.value + '').split('')
-
-            if (settings.direction == 'rtl') {
-                countTo = countTo.reverse()
-                digitsElms = [].slice.call(digitsElms).reverse()
-            }
-
-            // loop on each number element and change it
-            digitsElms.forEach(function (item, i) {
-                if (+item.dataset.value != countTo[i] && countTo[i] >= 0)
-                    setTimeout(function (j) {
-                        var diff = Math.abs(countTo[j] - +item.dataset.value);
-                        item.dataset.value = countTo[j]
-                        if (diff > 3)
-                            item.className = 'blur';
-                    }, i * settings.delay, i)
-            })
-        }
-
-        var counter = new Counter('.numCounter', { direction: 'rtl', delay: 200, digits: 7 })
-
-        socket.onmessage = (message) => {
-            const result = JSON.parse(message.data)
-            counter.count(result.todayTotal)
-        }
     </script>
 
 
